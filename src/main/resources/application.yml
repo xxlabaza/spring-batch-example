@@ -1,0 +1,16 @@
+
+server:
+  port: 9090
+    
+
+spring:
+  batch.job.enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+app.batch:
+    myJob:
+      chunkSize:    10
+      partitions:   5 
+      threads:      4
