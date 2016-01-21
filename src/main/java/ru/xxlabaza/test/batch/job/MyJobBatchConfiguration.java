@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2016 xxlabaza.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,6 +15,7 @@
  */
 package ru.xxlabaza.test.batch.job;
 
+import lombok.val;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -97,7 +98,7 @@ class MyJobBatchConfiguration {
 
     @Bean
     protected ThreadPoolTaskExecutor taskExecutor () {
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        val executor = new ThreadPoolTaskExecutor();
         executor.setThreadNamePrefix("task-executor-thread-");
         executor.setCorePoolSize(appProperties.getBatch().getMyJob().getThreads());
         return executor;

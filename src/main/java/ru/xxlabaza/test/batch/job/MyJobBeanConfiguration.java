@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2016 xxlabaza.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,10 +15,10 @@
  */
 package ru.xxlabaza.test.batch.job;
 
-import ru.xxlabaza.test.batch.model.Person;
 import java.util.HashMap;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
+import lombok.val;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.database.JpaPagingItemReader;
 import org.springframework.batch.item.support.AbstractItemStreamItemWriter;
@@ -26,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import ru.xxlabaza.test.batch.model.Person;
 
 /**
  *
@@ -46,7 +47,7 @@ class MyJobBeanConfiguration {
     public JpaPagingItemReader<Person> reader (@Value("#{stepExecutionContext[from]}") Integer from,
                                                @Value("#{stepExecutionContext[to]}") Integer to
     ) {
-        JpaPagingItemReader<Person> reader = new JpaPagingItemReader<>();
+        val reader = new JpaPagingItemReader<Person>();
         reader.setEntityManagerFactory(entityManagerFactory);
         reader.setSaveState(false);
 
@@ -77,7 +78,7 @@ class MyJobBeanConfiguration {
 
         @Override
         public void write (List<? extends ThreadInfoPersonWrapper> items) throws Exception {
-            String currentThreadName = Thread.currentThread().getName();
+            val currentThreadName = Thread.currentThread().getName();
 
             System.out.println();
             items.stream().forEach(item -> {
